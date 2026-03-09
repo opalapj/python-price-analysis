@@ -1,5 +1,6 @@
 from datetime import date
 from datetime import datetime
+from pathlib import Path
 
 import holidays as hd
 import matplotlib.dates as mdates
@@ -176,7 +177,8 @@ class MarketData:
         plt.setp(ax.get_xticklabels(), ha="right", rotation=45)
         plt.tight_layout()
         # plt.show()
-        plt.savefig("correlation")
+        file_path = Path("data", "output", "correlation")
+        plt.savefig(file_path)
         plt.close(fig)
 
     def ratios(self):
@@ -222,7 +224,8 @@ class MarketData:
         fig.legend(handles, labels, loc="outside lower center", ncol=len(labels))
         # plt.tight_layout()
         # plt.show()
-        plt.savefig("ratios")
+        file_path = Path("data", "output", "ratios")
+        plt.savefig(file_path)
 
 
 def date_enter_and_validate(strg="date", typ="date"):
@@ -328,11 +331,11 @@ def draw_heatmap(matrix):
             )
     plt.tight_layout()
     # plt.show()
-    plt.savefig(
-        "_".join(
-            [var_str, m_periods[0].strftime("%Y-%m"), m_periods[-1].strftime("%Y-%m")]
-        )
+    file_name = "_".join(
+        [var_str, m_periods[0].strftime("%Y-%m"), m_periods[-1].strftime("%Y-%m")]
     )
+    file_path = Path("data", "output", file_name)
+    plt.savefig(file_path)
     plt.close(fig)
 
 
